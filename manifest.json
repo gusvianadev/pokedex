@@ -1,0 +1,15 @@
+{
+	"short_name": "Pokédex",
+	"name": "A Pokédex",
+	"icons": [
+		{
+			"src": "favicon.ico",
+			"sizes": "452x452",
+			"type": "image/x-icon"
+		}
+	],
+	"start_url": ".",
+	"display": "standalone",
+	"theme_color": "#FFDE00",
+	"background_color": "#CC0000"
+}
