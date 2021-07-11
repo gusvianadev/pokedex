@@ -1,0 +1,15 @@
+@font-face {
+	font-family: "Pokémon Solid";
+	src: url("./pokemon/pokemon-solid.woff2") format("woff2"),
+		url("./pokemon/pokemon-solid.woff") format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Pixel Art";
+	src: url("./pixel-art/pixel-art.woff2") format("woff2"),
+		url("./pixel-art/pixel-art.woff") format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
