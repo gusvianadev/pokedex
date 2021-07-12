@@ -5,6 +5,7 @@ export const GlobalStyles = createGlobalStyle`
     :root {
         --clr-yellow: #FFDE00;
         --clr-yellow-dark: #B3A125;
+        --clr-yellow-shadow: #8C7D1D;
         --clr-blue: #3B4CCA;
         --clr-red: #FF0000;
         --clr-red-dark: #CC0000;
@@ -22,6 +23,7 @@ export const GlobalStyles = createGlobalStyle`
         height: 100vh;
         margin: 0px;
         padding: 0px;
+        overflow: hidden;
     }
 
     body {
@@ -30,6 +32,7 @@ export const GlobalStyles = createGlobalStyle`
         height: 100%;
         margin: 0px;
         padding: 0px;
+        overflow: hidden;
     }
 
     #root {

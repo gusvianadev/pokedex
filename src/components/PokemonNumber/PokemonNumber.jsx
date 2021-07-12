@@ -1,5 +1,7 @@
+import { PokemonNumberSty } from "./PokemonNumber.style";
+
 const PokemonNumber = ({ number }) => {
-	return <div>{number}</div>;
+	return <PokemonNumberSty>#{number}</PokemonNumberSty>;
 };
 
 export default PokemonNumber;

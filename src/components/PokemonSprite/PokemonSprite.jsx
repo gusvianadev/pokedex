@@ -1,10 +1,10 @@
-import { PokemonSpriteContainerSty } from "./PokemonSprite.style";
+import { PokemonSpriteSty } from "./PokemonSprite.style";
 
 const PokemonSprite = ({ sprite }) => {
 	return (
-		<PokemonSpriteContainerSty>
+		<PokemonSpriteSty>
 			<img src={sprite} alt="" />
-		</PokemonSpriteContainerSty>
+		</PokemonSpriteSty>
 	);
 };
 

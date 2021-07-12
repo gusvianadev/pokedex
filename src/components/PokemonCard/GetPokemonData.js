@@ -4,7 +4,16 @@ import { useQuery } from "react-query";
 const GetPokemonData = (pokeName) => {
 	const { isLoading, isError, data } = useQuery(
 		`get-pokemon-data-${pokeName}`,
-		async () => await axios(`https://pokeapi.co/api/v2/pokemon/${pokeName}`),
+		async () => {
+			const pokemon = await axios(
+				`https://pokeapi.co/api/v2/pokemon/${pokeName}`
+			);
+			const pokemonSpecies = await axios(
+				`https://pokeapi.co/api/v2/pokemon-species/${pokeName}`
+			);
+
+			return { pokemon, pokemonSpecies };
+		},
 		{
 			refetchOnWindowFocus: false,
 		}
@@ -18,8 +27,9 @@ const GetPokemonData = (pokeName) => {
 		pokemonData: !data
 			? data
 			: {
-					id: getId(data.data.id.toString()),
-					sprite: data.data.sprites.other.dream_world.front_default,
+					id: getId(data.pokemon.data.id.toString()),
+					sprite: data.pokemon.data.sprites.other.dream_world.front_default,
+					color: data.pokemonSpecies.data.color.name,
 			  },
 	};
 };

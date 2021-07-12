@@ -1,20 +1,22 @@
 import GetPokeList from "./GetPokeList";
 import PokemonCard from "../PokemonCard/PokemonCard";
+import { CardsHolderSty } from "./CardsHolder.styles";
+import LoadingRing from "../LoadingRing/LoadingRing";
 
 const CardsHolder = () => {
 	const { isLoading, isError, pokeList } = GetPokeList();
 	return (
-		<div>
+		<CardsHolderSty>
 			{isLoading ? (
-				<div>loading...</div>
+				<LoadingRing />
 			) : !isLoading && !isError ? (
 				pokeList.map((pokemon) => (
 					<PokemonCard pokeName={pokemon.name} key={`${pokemon.name}-card`} />
 				))
 			) : (
-				<div>error</div>
+				<div>error loading the data</div>
 			)}
-		</div>
+		</CardsHolderSty>
 	);
 };
 

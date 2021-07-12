@@ -1,17 +1,21 @@
 import styled from "styled-components";
 
 export const SearchBarSty = styled.div`
-	& input,
-	button {
-		border: 3px solid var(--clr-blue);
-		border-radius: 5px;
-		background-color: var(--clr-yellow);
-	}
+	width: 100%;
+	max-width: 500px;
+	margin: 0 auto;
+	display: flex;
 
 	& input {
-		box-shadow: inset -2px -2px 3px 2px var(--clr-yellow-dark);
-	}
-
-	& button {
+		margin: 0 auto;
+		border: 3px solid var(--clr-blue);
+		border-radius: 7px;
+		background-color: var(--clr-yellow);
+		width: 70%;
+		-webkit-box-shadow: inset 1px 1px 2px 2px var(--clr-yellow-shadow),
+			4px 4px 3px -1px black;
+		box-shadow: inset 1px 1px 2px 2px var(--clr-yellow-shadow),
+			4px 4px 3px -1px black;
+		padding: 3px;
 	}
 `;
