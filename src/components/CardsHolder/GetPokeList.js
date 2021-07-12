@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useQuery } from "react-query";
 
-const GetPokeList = ({ offset }) => {
+const GetPokeList = ( ) => {
 	const { isLoading, isError, data } = useQuery(
 		"get-pokemon-list",
 		async () =>
