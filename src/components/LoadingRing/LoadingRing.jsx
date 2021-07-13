@@ -2,7 +2,7 @@ import { LoadingRingSty } from "./LoadingRing.style";
 
 const LoadingRing = () => {
 	return (
-		<LoadingRingSty>
+		<LoadingRingSty className="ldn-ring">
 			<div></div>
 			<div></div>
 			<div></div>

@@ -17,16 +17,27 @@ const CardsHolder = () => {
 	}, [dispatch, fetchMore, isLoading, currentUrl]);
 	return (
 		<CardsHolderSty>
-			{pokeCards.map((card) => (
-				<PokemonCard key={card.pokeName} cardInfo={card} />
-			))}
-			{isLoading && <LoadingRing />}
-			<ButtonSty
-				props={{ width: "50%", maxWidth: "150px", padding: ".5rem 0" }}
-				onClick={() => dispatch(changeCurrentUrl(nextUrl))}
-			>
-				<p>more+</p>
-			</ButtonSty>
+			<div className="container cards">
+				{pokeCards.map((card) => (
+					<PokemonCard key={card.pokeName} cardInfo={card} />
+				))}
+			</div>
+			<div className="container ldn-ring-container">
+				{isLoading && <LoadingRing />}
+			</div>
+			<div className="container button-container">
+				<ButtonSty
+					props={{
+						width: "100%",
+						maxWidth: "150px",
+						padding: ".5rem 0",
+						display: `${pokeCards.length === 0 ? "none" : "flex"}`,
+					}}
+					onClick={() => dispatch(changeCurrentUrl(nextUrl))}
+				>
+					<p>more+</p>
+				</ButtonSty>
+			</div>
 		</CardsHolderSty>
 	);
 };
