@@ -3,10 +3,29 @@ import styled from "styled-components";
 export const CardsHolderSty = styled.div`
 	width: 100%;
 	height: 65vh;
-	overflow-y: scroll;
+	overflow-y: auto;
 	overflow-x: hidden;
 	margin: 1rem 0;
 	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-around;
+	flex-direction: column;
+
+	& .container {
+		width: 100%;
+	}
+
+	& .cards {
+		width: 100%;
+		height: fit-content;
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	& .ldn-ring-container {
+		display: flex;
+		margin: auto;
+
+		& .ldn-ring {
+			margin: auto;
+		}
+	}
 `;
