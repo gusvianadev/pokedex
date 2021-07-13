@@ -8,7 +8,6 @@ import { getPokeList } from "../../redux/thunkPokeList";
 import { changeCurrentUrl } from "../../redux/slicePokeCards";
 
 const CardsHolder = () => {
-	console.log("cardsHolder");
 	const { currentUrl, nextUrl, fetchMore, isLoading, isError, pokeCards } =
 		useSelector((state) => state.pokeCards);
 	const dispatch = useDispatch();
@@ -21,12 +20,6 @@ const CardsHolder = () => {
 			{pokeCards.map((card) => (
 				<PokemonCard key={card.pokeName} cardInfo={card} />
 			))}
-			{!isLoading &&
-				!isError &&
-				!fetchMore &&
-				pokeCards.map((card) => (
-					<PokemonCard key={card.pokeName} cardInfo={card} />
-				))}
 			{isLoading && <LoadingRing />}
 			<ButtonSty
 				props={{ width: "50%", maxWidth: "150px", padding: ".5rem 0" }}
