@@ -2,12 +2,13 @@ import styled from "styled-components";
 
 export const PokemonSpriteSty = styled.div`
 	width: 100%;
-	height: 82%;
-	background-color: lightgray;
+	height: 80%;
+	background-color: var(--clr-yellow);
 	display: flex;
 
 	& img {
-		width: 60%;
+		width: 80px;
+		height: 80px;
 		margin: auto;
 	}
 `;

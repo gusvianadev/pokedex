@@ -4,7 +4,7 @@ import { getPokeList } from "./thunkPokeList";
 export const pokeCardsSlice = createSlice({
 	name: "pokeCards",
 	initialState: {
-		currentUrl: "https://pokeapi.co/api/v2/pokemon?offset=0&limit=12",
+		currentUrl: "https://pokeapi.co/api/v2/pokemon?offset=0&limit=9", //? "limit" sets how many pokémon will be fetched
 		nextUrl: "",
 		fetchMore: true,
 		isLoading: false,

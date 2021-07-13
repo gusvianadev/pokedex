@@ -2,9 +2,8 @@ import PokemonNumber from "../PokemonNumber/PokemonNumber";
 import PokemonSprite from "../PokemonSprite/PokemonSprite";
 import PokemonName from "../PokemonName/PokemonName";
 import { PokemonCardSty } from "./PokemonCard.style";
-import PropsDestructuring from "./PropsDestructuring";
 
-const PokemonCard = ({ cardInfo }) => {
+const PokemonCard = ({ pokeName, id }) => {
 	// const colorPerType = {
 	// 	normal: "#bdbdae",
 	// 	fire: "#f95442",
@@ -25,13 +24,14 @@ const PokemonCard = ({ cardInfo }) => {
 	// 	steel: "#c4c2db",
 	// 	fairy: "#f9adff",
 	// };
-	const { pokeName, sprite, id, color } = PropsDestructuring(cardInfo);
 
 	return (
-		<PokemonCardSty pokemonColor={color}>
+		<PokemonCardSty>
 			<PokemonName name={pokeName} />
-			<PokemonSprite sprite={sprite} />
-			<PokemonNumber number={id} />
+			<PokemonSprite
+				sprite={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`}
+			/>
+			<PokemonNumber number={id.toString().padStart(3, "0")} />
 		</PokemonCardSty>
 	);
 };

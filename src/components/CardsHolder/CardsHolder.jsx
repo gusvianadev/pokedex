@@ -15,11 +15,18 @@ const CardsHolder = () => {
 	useEffect(() => {
 		fetchMore && !isLoading && dispatch(getPokeList(currentUrl));
 	}, [dispatch, fetchMore, isLoading, currentUrl]);
+
+	console.log(pokeCards);
+
 	return (
 		<CardsHolderSty>
 			<div className="container cards">
-				{pokeCards.map((card) => (
-					<PokemonCard key={card.pokeName} cardInfo={card} />
+				{pokeCards.map((card, i) => (
+					<PokemonCard
+						key={card.pokeName}
+						pokeName={card.pokeName}
+						id={i + 1}
+					/>
 				))}
 			</div>
 			<div className="container ldn-ring-container">

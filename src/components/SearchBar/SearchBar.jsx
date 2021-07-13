@@ -7,7 +7,10 @@ const SearchBar = () => {
 	return (
 		<SearchBarSty>
 			<input type="text" placeholder="Search..." />
-			<ButtonSty props={{ width: "18%", maxWidth: "auto", padding: "0" }}>
+			<ButtonSty
+				aria-label="search pokémon"
+				props={{ width: "18%", maxWidth: "auto", padding: "0" }}
+			>
 				<FaSearch />
 			</ButtonSty>
 		</SearchBarSty>
