@@ -2,16 +2,12 @@ import PokemonNumber from "../PokemonNumber/PokemonNumber";
 import PokemonSprite from "../PokemonSprite/PokemonSprite";
 import PokemonName from "../PokemonName/PokemonName";
 import { PokemonCardSty } from "./PokemonCard.style";
-import GetPokemonData from "./GetPokemonData";
-import LoadingRing from "../LoadingRing/LoadingRing";
 
-const PokemonCard = ({ pokeName }) => {
-	const { isLoading, isError, pokemonData } = GetPokemonData(pokeName);
-
+const PokemonCard = ({ cardInfo }) => {
 	// const colorPerType = {
 	// 	normal: "#bdbdae",
 	// 	fire: "#f95442",
-	// 	fighting: "#a85645",
+	// 	fighting: "#707070",
 	// 	water: "#55aeff",
 	// 	flying: "#79a4ff",
 	// 	grass: "#8bd650",
@@ -29,19 +25,15 @@ const PokemonCard = ({ pokeName }) => {
 	// 	fairy: "#f9adff",
 	// };
 
+	const { pokeName, basicData } = cardInfo;
+	const sprite = basicData.sprites.other.dream_world.front_default;
+	const id = basicData.id;
+
 	return (
-		<PokemonCardSty pokemonColor={pokemonData && pokemonData.color}>
-			{isLoading ? (
-				<LoadingRing />
-			) : !isLoading && !isError ? (
-				<>
-					<PokemonName name={pokeName} />
-					<PokemonSprite sprite={pokemonData.sprite} />
-					<PokemonNumber number={pokemonData.id} />
-				</>
-			) : (
-				<div>error loading the data</div>
-			)}
+		<PokemonCardSty>
+			<PokemonName name={pokeName} />
+			<PokemonSprite sprite={sprite} />
+			<PokemonNumber number={id} />
 		</PokemonCardSty>
 	);
 };

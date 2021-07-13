@@ -1,15 +1,15 @@
 import { FaSearch } from "react-icons/fa";
-import Button from "../Button/Button";
+
+import { ButtonSty } from "../Button/Button.style";
 import { SearchBarSty } from "./SearchBar.style";
 
 const SearchBar = () => {
 	return (
 		<SearchBarSty>
 			<input type="text" placeholder="Search..." />
-			<Button
-				content={<FaSearch />}
-				props={{ width: "18%", maxWidth: "auto", padding: "0" }}
-			/>
+			<ButtonSty props={{ width: "18%", maxWidth: "auto", padding: "0" }}>
+				<FaSearch />
+			</ButtonSty>
 		</SearchBarSty>
 	);
 };
