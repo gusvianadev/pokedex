@@ -9,7 +9,6 @@ export const pokeCardsSlice = createSlice({
 		fetchMore: true,
 		isLoading: false,
 		isError: false,
-		cardsToPush: [],
 		pokeCards: [],
 	},
 	reducers: {
