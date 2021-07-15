@@ -16,8 +16,6 @@ const CardsHolder = () => {
 		fetchMore && !isLoading && dispatch(getPokeList(currentUrl));
 	}, [dispatch, fetchMore, isLoading, currentUrl]);
 
-	console.log(pokeCards);
-
 	return (
 		<CardsHolderSty>
 			<div className="container cards">
@@ -38,9 +36,9 @@ const CardsHolder = () => {
 						width: "100%",
 						maxWidth: "150px",
 						padding: ".5rem 0",
-						display: `${pokeCards.length === 0 ? "none" : "flex"}`,
+						display: `${isLoading ? "none" : "flex"}`,
 					}}
-					onClick={() => dispatch(changeCurrentUrl(nextUrl))}
+					onClick={(e) => dispatch(changeCurrentUrl(nextUrl))}
 				>
 					<p>more+</p>
 				</ButtonSty>
