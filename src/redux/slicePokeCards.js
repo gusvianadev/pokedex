@@ -31,8 +31,6 @@ export const pokeCardsSlice = createSlice({
 		[getPokeList.rejected]: (state) => {
 			state.isLoading = false;
 			state.isError = true;
-
-			console.log("error");
 		},
 	},
 });

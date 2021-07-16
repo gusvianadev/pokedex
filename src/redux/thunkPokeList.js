@@ -5,13 +5,14 @@ import { setupCache } from "axios-cache-adapter";
 export const getPokeList = createAsyncThunk(
 	"pokeList/getpokeList",
 	async (currentUrl) => {
+		//? cache setter
 		const cache = setupCache({
 			maxAge: 604800000,
 		});
-
 		const getData = axios.create({
 			adapter: cache.adapter,
 		});
+
 		const res = (
 			await getData({
 				url: currentUrl,
@@ -20,7 +21,7 @@ export const getPokeList = createAsyncThunk(
 		).data;
 
 		const nextUrl = res.next;
-		const pokesToFetch = res.results;
+		const pokesToFetch = res.results; //? it's an array
 
 		const pokeList = [];
 		for (const poke of pokesToFetch) {

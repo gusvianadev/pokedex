@@ -5,7 +5,7 @@ export const ButtonSty = styled.button`
 	max-width: ${(props) => props.props.maxWidth};
 	padding: ${(props) => props.props.padding};
 	margin: 0 auto;
-	display: ${(props) => (props.props.display ? props.props.display : "flex")};
+	display: flex;
 	-webkit-box-shadow: inset 0px 0px 10px 1px var(--clr-yellow-shadow),
 		4px 4px 3px -1px black;
 	box-shadow: inset 0px 0px 10px 1px var(--clr-yellow-shadow),
