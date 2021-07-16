@@ -26,7 +26,10 @@ const PokemonCard = ({ pokeName, id }) => {
 	// };
 
 	return (
-		<PokemonCardSty>
+		<PokemonCardSty
+			id={`${pokeName}-pokemon-card`}
+			data-testid={`poke-card-${id}`}
+		>
 			<PokemonName name={pokeName} />
 			<PokemonSprite
 				sprite={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`}

@@ -2,7 +2,7 @@ import { TitleSty } from "./Title.style";
 
 const Title = () => {
 	return (
-		<TitleSty>
+		<TitleSty data-testid="app-title">
 			<p className="title-letter title-letter-1">P</p>
 			<p className="title-letter title-letter-2 title-letter__on-top">o</p>
 			<p className="title-letter title-letter-3">k</p>
