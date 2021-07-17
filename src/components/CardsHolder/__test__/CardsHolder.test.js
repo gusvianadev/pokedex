@@ -44,5 +44,3 @@ describe("On CardsHolder render", () => {
 		expect(pokeCards.length).toBeGreaterThan(0);
 	});
 });
-
-const mockClick = jest.fn();

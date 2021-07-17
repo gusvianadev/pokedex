@@ -6,4 +6,5 @@ export const AppSty = styled.div`
 	background-color: var(--clr-red-dark);
 	padding: 0.3rem 0;
 	overflow-y: auto;
+	user-select: none;
 `;

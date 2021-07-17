@@ -1,8 +1,9 @@
 import { ButtonSty } from "./Button.style";
 
-const Button = ({ testid, aria, styles, onClick, content }) => {
+const Button = ({ testid, aria, type, styles, onClick, content }) => {
 	return (
 		<ButtonSty
+			type={type}
 			aria-label={aria}
 			data-testid={testid}
 			onClick={onClick}

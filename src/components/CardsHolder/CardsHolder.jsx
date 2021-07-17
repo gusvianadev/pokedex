@@ -6,11 +6,19 @@ import { useEffect } from "react";
 import { getPokeList } from "../../redux/thunkPokeList";
 import { changeCurrentUrl } from "../../redux/slicePokeCards";
 import Button from "../Button/Button";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 const CardsHolder = () => {
-	const { currentUrl, nextUrl, fetchMore, isLoading, pokeCards } = useSelector(
-		(state) => state.pokeCards
-	);
+	const {
+		currentUrl,
+		nextUrl,
+		fetchMore,
+		showSingle,
+		isLoading,
+		isError,
+		pokeCards,
+		singleCard,
+	} = useSelector((state) => state.pokeCards);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -19,14 +27,23 @@ const CardsHolder = () => {
 
 	return (
 		<CardsHolderSty data-testid="cards-holder">
+			{isError && <ErrorMessage />}
 			<div data-testid="cards-container" className="container cards">
-				{pokeCards.map((card, i) => (
-					<PokemonCard
-						key={card.pokeName}
-						pokeName={card.pokeName}
-						id={i + 1}
-					/>
-				))}
+				{!showSingle && !isError
+					? pokeCards.map((card, i) => (
+							<PokemonCard
+								key={card.pokeName}
+								pokeName={card.pokeName}
+								id={i + 1}
+							/>
+					  ))
+					: !isLoading &&
+					  !isError && (
+							<PokemonCard
+								pokeName={singleCard.pokeData.name}
+								id={singleCard.pokeData.id}
+							/>
+					  )}
 			</div>
 			<div className="container ldn-ring-container">
 				{isLoading && <LoadingRing data-testid="ldn-ring" />}
@@ -36,9 +53,10 @@ const CardsHolder = () => {
                     the button is not rendered until I have at
                     least the first chunk of cards
                 */}
-				{!isLoading && pokeCards.length !== 0 && (
+				{!isLoading && pokeCards.length !== 0 && !showSingle && !isError && (
 					<Button
 						aria="search more pokémon button"
+						type="button"
 						testid="search-more-btn"
 						styles={{
 							width: "100%",

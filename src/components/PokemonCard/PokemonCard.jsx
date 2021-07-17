@@ -1,7 +1,11 @@
-import PokemonNumber from "../PokemonNumber/PokemonNumber";
-import PokemonSprite from "../PokemonSprite/PokemonSprite";
-import PokemonName from "../PokemonName/PokemonName";
+import PokemonNumber from "./PokemonNumber/PokemonNumber";
+import PokemonSprite from "./PokemonSprite/PokemonSprite";
+import PokemonName from "./PokemonName/PokemonName";
 import { PokemonCardSty } from "./PokemonCard.style";
+import { useDispatch, useSelector } from "react-redux";
+import { setShowSingle } from "../../redux/slicePokeCards";
+import { getSinglePoke } from "../../redux/thunkSinglePoke";
+import PokemonCategory from "./PokemonCategory/PokemonCategory";
 
 const PokemonCard = ({ pokeName, id }) => {
 	// const colorPerType = {
@@ -25,16 +29,41 @@ const PokemonCard = ({ pokeName, id }) => {
 	// 	fairy: "#f9adff",
 	// };
 
+	const { showSingle, singleCard } = useSelector((state) => state.pokeCards);
+	const { pokeData, speciesData } = singleCard;
+	const dispatch = useDispatch();
+
 	return (
 		<PokemonCardSty
 			id={`${pokeName}-pokemon-card`}
-			data-testid={`poke-card-${id}`}
+			data-testid={"poke-card"}
+			onClick={() => {
+				!showSingle && dispatch(getSinglePoke(pokeName));
+				dispatch(setShowSingle(true));
+			}}
 		>
-			<PokemonName name={pokeName} />
-			<PokemonSprite
-				sprite={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`}
-			/>
-			<PokemonNumber number={id.toString().padStart(3, "0")} />
+			{!showSingle ? (
+				<>
+					<PokemonName name={pokeName} />
+					<PokemonSprite
+						sprite={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`}
+						pokeName={pokeName}
+						id={id}
+					/>
+					<PokemonNumber number={id.toString().padStart(3, "0")} />
+				</>
+			) : (
+				<>
+					<PokemonName name={pokeName} />
+					<PokemonSprite
+						sprite={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`}
+						pokeName={pokeName}
+						id={id}
+					/>
+					<PokemonNumber number={id.toString().padStart(3, "0")} />
+					{/* <PokemonCategory category={speciesData.genera} /> */}
+				</>
+			)}
 		</PokemonCardSty>
 	);
 };

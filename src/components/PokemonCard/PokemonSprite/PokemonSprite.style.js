@@ -7,8 +7,8 @@ export const PokemonSpriteSty = styled.div`
 	display: flex;
 
 	& img {
-		width: 80px;
-		height: 80px;
+		width: ${(props) => (!props.broken ? "80px" : "110px")};
+		height: ${(props) => (!props.broken ? "80px" : "110px")};
 		margin: auto;
 	}
 `;
