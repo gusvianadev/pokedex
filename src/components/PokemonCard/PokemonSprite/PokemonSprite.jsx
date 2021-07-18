@@ -7,13 +7,12 @@ const PokemonSprite = ({ sprite, pokeName, id }) => {
 	const { addDefaultSrc } = FallbackSrc(setBrokenSrc, id);
 
 	return (
-		<PokemonSpriteSty broken={brokenSrc}>
-			<img
-				src={sprite}
-				onError={(e) => addDefaultSrc(e)}
-				alt={`sprite of ${pokeName}`}
-			/>
-		</PokemonSpriteSty>
+		<PokemonSpriteSty
+			src={sprite}
+			onError={(e) => addDefaultSrc(e)}
+			alt={`sprite of ${pokeName}`}
+			broken={brokenSrc}
+		/>
 	);
 };
 

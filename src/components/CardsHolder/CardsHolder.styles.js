@@ -15,7 +15,8 @@ export const CardsHolderSty = styled.div`
 
 	& .cards {
 		width: 100%;
-		height: fit-content;
+		height: ${(props) =>
+			props.showSingle && !props.isLoading ? "100%" : "fit-content"};
 		display: flex;
 		flex-wrap: wrap;
 	}

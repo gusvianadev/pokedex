@@ -4,7 +4,7 @@ import LoadingRing from "../LoadingRing/LoadingRing";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getPokeList } from "../../redux/thunkPokeList";
-import { changeCurrentUrl } from "../../redux/slicePokeCards";
+import { changeCurrentUrl, setShowSingle } from "../../redux/slicePokeCards";
 import Button from "../Button/Button";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
@@ -26,7 +26,14 @@ const CardsHolder = () => {
 	}, [dispatch, fetchMore, isLoading, currentUrl]);
 
 	return (
-		<CardsHolderSty data-testid="cards-holder">
+		<CardsHolderSty
+			isLoading={isLoading}
+			showSingle={showSingle}
+			data-testid="cards-holder"
+		>
+			{showSingle && (
+				<button onClick={() => dispatch(setShowSingle(false))}>X</button>
+			)}
 			{isError && <ErrorMessage />}
 			<div data-testid="cards-container" className="container cards">
 				{!showSingle && !isError
