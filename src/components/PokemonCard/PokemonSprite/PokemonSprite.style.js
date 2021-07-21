@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
 export const PokemonSpriteSty = styled.img`
-	width: ${(props) => (!props.broken ? "80px" : "110px")};
-	height: ${(props) => (!props.broken ? "80px" : "110px")};
+	width: 110px;
+	height: 110px;
 `;

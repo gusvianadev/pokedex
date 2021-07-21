@@ -4,6 +4,11 @@ export const ItemContainerSty = styled.div`
 	overflow: auto;
 	display: flex;
 	border: 1px solid black;
+	padding: ${(props) =>
+		props.showSingle &&
+		props.typeOfContent !== "sprite" &&
+		props.typeOfContent !== "flavor-text" &&
+		"0.3rem 0"};
 	background-color: ${(props) =>
 		props.typeOfContent === "sprite" ? "white" : "var(--clr-blue)"};
 	color: white;
@@ -136,7 +141,8 @@ export const CardItemSty = styled.div`
 	}
 
 	& * {
-		overflow: auto;
+		overflow-y: auto;
+		overflow-x: hidden;
 	}
 `;
 
@@ -164,7 +170,7 @@ const colorPerType = {
 export const PokeTypeSty = styled.div`
 	background-color: ${(props) => colorPerType[props.pokeType]};
 	border-radius: 5px;
-	width: 110px;
+	width: 125px;
 	padding: 2px;
 	text-align: center;
 	border: 2px solid black;

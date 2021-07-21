@@ -50,9 +50,7 @@ export const GlobalStyles = createGlobalStyle`
         margin: 0;
     }
     
-    //? this is to unset all default styling of these elements
-    //? the background-color is just to know the element is there
-    //? when I place it in a component
+    //? the background-color is to know that the element is in fact there
     input,
     textarea,
     button {

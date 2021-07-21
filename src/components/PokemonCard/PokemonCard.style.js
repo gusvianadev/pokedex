@@ -18,7 +18,7 @@ export const PokemonCardSty = styled.div`
 
 	@media (min-width: 576px) {
 		width: ${(props) => (!props.showSingle ? "220px" : "90%")};
-		height: ${(props) => (!props.showSingle ? "240px" : "80%")};
+		height: ${(props) => (!props.showSingle ? "240px" : "100%")};
 		margin: ${(props) => (!props.showSingle ? "0 auto 1.5rem auto" : "auto")};
 		grid-template-columns: ${(props) =>
 			!props.showSingle ? "auto" : "36% 32% 32%"};

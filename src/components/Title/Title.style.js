@@ -13,7 +13,7 @@ export const TitleSty = styled.h1`
 	position: relative;
 	user-select: none;
 
-	& .title-letter {
+	& .title-character {
 		display: inline-block;
 		margin: 0;
 		padding: 0;
@@ -23,12 +23,12 @@ export const TitleSty = styled.h1`
 		margin-inline-end: 0;
 	}
 
-	& .title-letter__on-top {
+	& .title-character__on-top {
 		position: relative;
 	}
 
-	& .title-letter-4,
-	.title-letter-6 {
+	& .title-character-4,
+	.title-character-6 {
 		transform: rotate(-2deg);
 	}
 `;

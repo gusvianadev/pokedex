@@ -21,6 +21,9 @@ export const pokeCardsSlice = createSlice({
 		},
 		setShowSingle: (state, { payload }) => {
 			state.showSingle = payload;
+			if (payload === false) {
+				state.isError = false;
+			}
 		},
 	},
 	extraReducers: {

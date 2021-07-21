@@ -4,7 +4,6 @@ import Button from "../Button/Button";
 import { SearchBarSty } from "./SearchBar.style";
 import { useState } from "react";
 import { getSinglePoke } from "../../redux/thunkSinglePoke";
-import { setShowSingle } from "../../redux/slicePokeCards";
 
 const SearchBar = () => {
 	const dispatch = useDispatch();
@@ -16,12 +15,13 @@ const SearchBar = () => {
 				pokeToSearch
 					? dispatch(getSinglePoke(pokeToSearch))
 					: alert("You must type something!");
+				setPokeToSearch("");
 			}}
 		>
 			<input
+				value={pokeToSearch}
 				onChange={(e) => {
 					setPokeToSearch(e.target.value);
-					!e.target.value && dispatch(setShowSingle(false));
 				}}
 				type="text"
 				placeholder="Search..."

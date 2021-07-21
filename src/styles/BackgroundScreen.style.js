@@ -9,6 +9,19 @@ export const BackgroundScreenSty = styled.div`
 	padding: ${(props) => props.padding || 0};
 	border-radius: 15px;
 	background-image: url(${backgroundSquarePattern});
-	-webkit-box-shadow: inset 3px 3px 2px 2px #3f3f3f, 5px 5px 0px -1px #3a3a3a;
-	box-shadow: inset 3px 3px 2px 2px #3f3f3f, 5px 5px 0px -1px #3a3a3a;
+	-webkit-box-shadow: inset 5px 5px 2px 2px #6f6f6f, 5px 5px 2px 2px #5b0000;
+	box-shadow: inset 5px 5px 2px 2px #6f6f6f, 5px 5px 2px 2px #5b0000;
+
+	:before {
+		content: "";
+		position: absolute;
+		border-radius: inherit;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		pointer-events: none;
+		-webkit-box-shadow: inset 0px 0px 39px -9px #000000;
+		box-shadow: inset 0px 0px 39px -9px #000000;
+	}
 `;
