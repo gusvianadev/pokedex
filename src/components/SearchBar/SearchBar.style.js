@@ -17,5 +17,9 @@ export const SearchBarSty = styled.form`
 		box-shadow: inset 1px 1px 2px 2px var(--clr-yellow-shadow),
 			4px 4px 3px -1px black;
 		padding: 5px 10px;
+
+		::placeholder {
+			color: var(--clr-blue);
+		}
 	}
 `;

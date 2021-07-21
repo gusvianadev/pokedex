@@ -3,11 +3,13 @@ import styled from "styled-components";
 export const CardsHolderSty = styled.div`
 	width: 100%;
 	height: 65vh;
+	max-height: 700px;
 	overflow-y: auto;
 	overflow-x: hidden;
 	margin: 1rem 0;
 	display: flex;
 	flex-direction: column;
+	padding-bottom: 0.3rem;
 
 	& .container {
 		width: 100%;
