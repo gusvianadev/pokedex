@@ -1,8 +1,9 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const CardsHolderSty = styled.div`
 	width: 100%;
 	height: 65vh;
+	min-height: 500px;
 	max-height: 700px;
 	overflow-y: auto;
 	overflow-x: hidden;
@@ -17,8 +18,7 @@ export const CardsHolderSty = styled.div`
 
 	& .cards {
 		width: 100%;
-		height: ${(props) =>
-			props.showSingle && !props.isLoading ? "100%" : "fit-content"};
+		height: ${(props) => (props.showSingle && !props.isLoading ? '100%' : 'fit-content')};
 		display: flex;
 		flex-wrap: wrap;
 	}
