@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-export const AppSty = styled.div`
+const AppSty = styled.div`
 	width: 100%;
 	height: 100%;
 	background-color: var(--clr-red-dark);
@@ -8,3 +8,5 @@ export const AppSty = styled.div`
 	overflow-y: auto;
 	user-select: none;
 `;
+
+export default AppSty;

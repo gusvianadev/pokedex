@@ -1,7 +1,7 @@
-import { createGlobalStyle } from "styled-components";
-import "./fonts/fonts.css";
+import { createGlobalStyle } from 'styled-components';
+import './fonts/fonts.css';
 
-export const GlobalStyles = createGlobalStyle`
+const GlobalStyles = createGlobalStyle`
     :root {
         --clr-yellow: #FFDE00;
         --clr-yellow-dark: #B3A125;
@@ -63,3 +63,5 @@ export const GlobalStyles = createGlobalStyle`
         height: auto;
     }
 `;
+
+export default GlobalStyles;

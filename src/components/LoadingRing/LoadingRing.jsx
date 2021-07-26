@@ -1,14 +1,11 @@
-import { LoadingRingSty } from "./LoadingRing.style";
+import LoadingRingSty from './LoadingRing.style';
 
-const LoadingRing = () => {
-	return (
-		<LoadingRingSty className="ldn-ring">
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-		</LoadingRingSty>
-	);
-};
-
+const LoadingRing = () => (
+	<LoadingRingSty className="ldn-ring">
+		<div />
+		<div />
+		<div />
+		<div />
+	</LoadingRingSty>
+);
 export default LoadingRing;

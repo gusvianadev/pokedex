@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-export const ButtonSty = styled.button`
+const ButtonSty = styled.button`
 	width: ${(props) => props.props.width};
 	max-width: ${(props) => props.props.maxWidth};
 	padding: ${(props) => props.props.padding};
@@ -34,3 +34,5 @@ export const ButtonSty = styled.button`
 		text-transform: uppercase;
 	}
 `;
+
+export default ButtonSty;

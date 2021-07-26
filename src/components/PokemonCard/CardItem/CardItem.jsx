@@ -1,6 +1,6 @@
-import { useSelector } from "react-redux";
-import { CardItemSty, ItemContainerSty } from "./CardItem.style";
-import CardItemFunctions from "./CardItemFunctions";
+import { useSelector } from 'react-redux';
+import { CardItemSty, ItemContainerSty } from './CardItem.style';
+import CardItemFunctions from './CardItemFunctions';
 
 const CardItem = ({ pokeName, id, content }) => {
 	const { contentToShow } = CardItemFunctions({ pokeName, id, content });

@@ -1,11 +1,11 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { setupCache } from "axios-cache-adapter";
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { setupCache } from 'axios-cache-adapter';
 
-export const getPokeList = createAsyncThunk(
-	"pokeList/getpokeList",
+const getPokeList = createAsyncThunk(
+	'pokeList/getpokeList',
 	async (currentUrl) => {
-		//? cache setter
+		// cache setter
 		const cache = setupCache({
 			maxAge: 604800000,
 		});
@@ -16,20 +16,23 @@ export const getPokeList = createAsyncThunk(
 		const res = (
 			await getData({
 				url: currentUrl,
-				method: "get",
+				method: 'get',
 			})
 		).data;
 
 		const nextUrl = res.next;
-		const pokesToFetch = res.results; //? it's an array
+		const pokesToFetch = res.results; // it's an array
 
-		const pokeList = [];
-		for (const poke of pokesToFetch) {
-			pokeList.push({
-				pokeName: poke.name,
-			});
-		}
+		const pokeList = pokesToFetch.map((poke) => poke.name);
+
+		// for (const poke of pokesToFetch) {
+		// 	pokeList.push({
+		// 		pokeName: poke.name,
+		// 	});
+		// }
 
 		return { nextUrl, pokeList };
 	}
 );
+
+export default getPokeList;

@@ -1,6 +1,6 @@
-import { useState } from "react";
-import FallbackSrc from "./FallbackSrc";
-import { PokemonSpriteSty } from "./PokemonSprite.style";
+import { useState } from 'react';
+import FallbackSrc from './FallbackSrc';
+import PokemonSpriteSty from './PokemonSprite.style';
 
 const PokemonSprite = ({ sprite, pokeName, id }) => {
 	const [brokenSrc, setBrokenSrc] = useState(false);

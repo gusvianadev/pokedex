@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-export const SearchBarSty = styled.form`
+const SearchBarSty = styled.form`
 	width: 100%;
 	margin: 0 auto;
 	display: flex;
@@ -27,3 +27,5 @@ export const SearchBarSty = styled.form`
 		margin: 0 0 0 auto;
 	}
 `;
+
+export default SearchBarSty;

@@ -1,11 +1,11 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { setupCache } from "axios-cache-adapter";
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { setupCache } from 'axios-cache-adapter';
 
-export const getSinglePoke = createAsyncThunk(
-	"singlePoke/getSinglePoke",
+const getSinglePoke = createAsyncThunk(
+	'singlePoke/getSinglePoke',
 	async (pokeToSearch) => {
-		//? cache setter
+		// cache setter
 		const cache = setupCache({
 			maxAge: 604800000,
 		});
@@ -16,17 +16,19 @@ export const getSinglePoke = createAsyncThunk(
 		const pokeData = (
 			await getData({
 				url: `https://pokeapi.co/api/v2/pokemon/${pokeToSearch}`,
-				method: "get",
+				method: 'get',
 			})
 		).data;
 
 		const speciesData = (
 			await getData({
 				url: `https://pokeapi.co/api/v2/pokemon-species/${pokeToSearch}`,
-				method: "get",
+				method: 'get',
 			})
 		).data;
 
 		return { pokeData, speciesData };
 	}
 );
+
+export default getSinglePoke;

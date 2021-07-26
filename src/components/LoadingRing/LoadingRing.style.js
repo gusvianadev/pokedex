@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-export const LoadingRingSty = styled.div`
+const LoadingRingSty = styled.div`
 	display: inline-block;
 	position: relative;
 	width: 80px;
@@ -37,3 +37,5 @@ export const LoadingRingSty = styled.div`
 		}
 	}
 `;
+
+export default LoadingRingSty;

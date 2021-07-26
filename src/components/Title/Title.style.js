@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-export const TitleSty = styled.h1`
+const TitleSty = styled.h1`
 	width: 95%;
 	display: block;
 	margin: auto;
-	font-family: "Pokémon Solid", Arial, Helvetica, sans-serif;
+	font-family: 'Pokémon Solid', Arial, Helvetica, sans-serif;
 	font-size: 4.5em;
 	text-align: center;
 	text-shadow: 4px 4px 3px black, 4px 4px 15px black;
@@ -32,3 +32,5 @@ export const TitleSty = styled.h1`
 		transform: rotate(-2deg);
 	}
 `;
+
+export default TitleSty;

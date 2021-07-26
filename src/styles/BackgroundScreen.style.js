@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import backgroundSquarePattern from "../assets/images/background-square-pattern.png";
+import styled from 'styled-components';
+import backgroundSquarePattern from '../assets/images/background-square-pattern.png';
 
-export const BackgroundScreenSty = styled.div`
+const BackgroundScreenSty = styled.div`
 	position: relative;
 	width: 97%;
 	max-width: 768px;
@@ -13,7 +13,7 @@ export const BackgroundScreenSty = styled.div`
 	box-shadow: inset 5px 5px 2px 2px #6f6f6f, 5px 5px 2px 2px #5b0000;
 
 	:before {
-		content: "";
+		content: '';
 		position: absolute;
 		border-radius: inherit;
 		top: 0;
@@ -25,3 +25,5 @@ export const BackgroundScreenSty = styled.div`
 		box-shadow: inset 0px 0px 39px -9px #000000;
 	}
 `;
+
+export default BackgroundScreenSty;

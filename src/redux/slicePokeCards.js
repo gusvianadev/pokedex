@@ -1,12 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { getPokeList } from "./thunkPokeList";
-import { getSinglePoke } from "./thunkSinglePoke";
+import { createSlice } from '@reduxjs/toolkit';
+import getPokeList from './thunkPokeList';
+import getSinglePoke from './thunkSinglePoke';
 
 export const pokeCardsSlice = createSlice({
-	name: "pokeCards",
+	name: 'pokeCards',
 	initialState: {
-		currentUrl: "https://pokeapi.co/api/v2/pokemon?offset=0&limit=12", //? "limit" sets how many pokémon will be fetched
-		nextUrl: "",
+		// "limit" sets how many pokémon will be fetched
+		currentUrl: 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=12',
+		nextUrl: '',
 		fetchMore: true,
 		showSingle: false,
 		isLoading: false,
@@ -39,7 +40,7 @@ export const pokeCardsSlice = createSlice({
 			state.pokeCards.push(...payload.pokeList);
 			state.nextUrl = payload.nextUrl;
 		},
-		[getPokeList.rejected]: (state, { payload }) => {
+		[getPokeList.rejected]: (state) => {
 			state.isLoading = false;
 			state.isError = true;
 		},

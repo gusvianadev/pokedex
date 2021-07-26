@@ -1,13 +1,15 @@
-import { PokeTypeSty } from "./CardItem.style";
+import { PokeTypeSty } from './CardItem.style';
 
 const CardItemFunctions = ({ pokeName, id, content }) => {
-	if (id === "number") {
-		//? adds leading zero
-		return { contentToShow: `#${content.toString().padStart(3, "0")}` };
-	} else if (id === "category") {
-		const engCategory = content.filter((cat) => cat.language.name === "en");
+	if (id === 'number') {
+		// adds leading zero
+		return { contentToShow: `#${content.toString().padStart(3, '0')}` };
+	}
+	if (id === 'category') {
+		const engCategory = content.filter((cat) => cat.language.name === 'en');
 		return { contentToShow: engCategory[0].genus };
-	} else if (id === "types") {
+	}
+	if (id === 'types') {
 		return {
 			contentToShow: content.map((type, i) => (
 				<PokeTypeSty
@@ -19,21 +21,35 @@ const CardItemFunctions = ({ pokeName, id, content }) => {
 				</PokeTypeSty>
 			)),
 		};
-	} else if (id === "height" || id === "weight") {
+	}
+	if (id === 'height' || id === 'weight') {
 		const layout = [id, (content * 0.1).toFixed(1)];
-
+		const toRender = (item, i) => {
+			if (i === 0) {
+				return item;
+			}
+			if (id === 'height') {
+				return `${item}m`;
+			}
+			return `${item}kg`;
+		};
 		return {
 			contentToShow: layout.map((item, i) => (
 				<div key={`${id} of ${pokeName} - item ${i + 1}`}>
-					{i === 0 ? item : id === "height" ? `${item}m` : `${item}kg`}
+					{toRender(item, i)}
 				</div>
 			)),
 		};
-	} else if (id === "flavor-text") {
-		const engEntries = content.filter((entry) => entry.language.name === "en");
+	}
+	if (id === 'flavor-text') {
+		const engEntries = content.filter(
+			(entry) => entry.language.name === 'en'
+		);
 
 		return {
-			contentToShow: <div>{engEntries[engEntries.length - 1].flavor_text}</div>,
+			contentToShow: (
+				<div>{engEntries[engEntries.length - 1].flavor_text}</div>
+			),
 		};
 	}
 	return { contentToShow: content };
