@@ -1,13 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import { ImCross } from 'react-icons/im';
+import { BiLeftArrow, BiRightArrow } from 'react-icons/bi';
 import PokemonCard from '../PokemonCard/PokemonCard';
 import CardsHolderSty from './CardsHolder.styles';
 import LoadingRing from '../LoadingRing/LoadingRing';
 import getPokeList from '../../redux/thunkPokeList';
+import getSinglePoke from '../../redux/thunkSinglePoke';
 import { changeCurrentUrl, setShowSingle } from '../../redux/slicePokeCards';
 import Button from '../Button/Button';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import NavBar from '../PokemonCard/NavBar/NavBar';
 
 const CardsHolder = () => {
 	const {
@@ -26,13 +28,48 @@ const CardsHolder = () => {
 		fetchMore && !isLoading && dispatch(getPokeList(currentUrl));
 	}, [dispatch, fetchMore, isLoading, currentUrl]);
 
+	const upperSideBtnStyles = {
+		width: '40px',
+		minHeight: '25px',
+		margin: '0px',
+	};
 	return (
 		<CardsHolderSty
 			isLoading={isLoading}
 			showSingle={showSingle}
 			data-testid="cards-holder"
 		>
-			{showSingle && <NavBar />}
+			{showSingle && !isLoading && !isError && (
+				<div className="cards-holder-nav-bar">
+					<Button
+						aria="button to close the pokemon card and go back to showcase all cards"
+						type="button"
+						btnStyles={upperSideBtnStyles}
+						onClick={() => dispatch(setShowSingle(false))}
+						content={<ImCross />}
+					/>
+					<Button
+						aria="button to go to the previous pokemon"
+						type="button"
+						btnStyles={upperSideBtnStyles}
+						onClick={() =>
+							dispatch(getSinglePoke(singleCard.pokeData.id - 1))
+						}
+						content={<BiLeftArrow />}
+						disabled={singleCard.pokeData.id === 1}
+					/>
+					<Button
+						aria="button to go to the next pokemon"
+						type="button"
+						btnStyles={upperSideBtnStyles}
+						onClick={() =>
+							dispatch(getSinglePoke(singleCard.pokeData.id + 1))
+						}
+						content={<BiRightArrow />}
+						disabled={singleCard.pokeData.id === 898}
+					/>
+				</div>
+			)}
 			{isError && <ErrorMessage />}
 			<div data-testid="cards-container" className="container cards">
 				{!showSingle && !isError
@@ -55,10 +92,6 @@ const CardsHolder = () => {
 				{isLoading && <LoadingRing data-testid="ldn-ring" />}
 			</div>
 			<div className="container button-container">
-				{/* the pokeCards.length is to make sure that
-                    the button is not rendered until I have at
-                    least the first chunk of cards
-                */}
 				{!isLoading &&
 					pokeCards.length !== 0 &&
 					!showSingle &&
@@ -67,10 +100,10 @@ const CardsHolder = () => {
 							aria="search more pokémon button"
 							type="button"
 							testid="search-more-btn"
-							styles={{
+							btnStyles={{
 								width: '100%',
 								maxWidth: '150px',
-								padding: '.5rem 0',
+								padding: '0.5rem 0',
 							}}
 							onClick={() => dispatch(changeCurrentUrl(nextUrl))}
 							content={<p>more+</p>}

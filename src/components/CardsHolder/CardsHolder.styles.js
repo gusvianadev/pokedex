@@ -10,7 +10,17 @@ const CardsHolderSty = styled.div`
 	margin: 1rem 0;
 	display: flex;
 	flex-direction: column;
-	padding-bottom: 0.3rem;
+	padding: 0 0.3rem 0.3rem 0.3rem;
+
+	& .cards-holder-nav-bar {
+		display: flex;
+		justify-content: space-between;
+
+		& > :nth-child(2) {
+			margin: auto 2rem auto auto;
+		}
+        & 
+	}
 
 	& .container {
 		width: 100%;
