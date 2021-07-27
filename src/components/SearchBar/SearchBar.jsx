@@ -13,7 +13,8 @@ const SearchBar = () => {
 		<SearchBarSty
 			onSubmit={(e) => {
 				e.preventDefault();
-				pokeToSearch && dispatch(getSinglePoke(pokeToSearch));
+				pokeToSearch &&
+					dispatch(getSinglePoke(pokeToSearch.toLocaleLowerCase()));
 				// alert('You must type something!');
 				setPokeToSearch('');
 			}}

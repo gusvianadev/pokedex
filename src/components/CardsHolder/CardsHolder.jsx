@@ -39,7 +39,7 @@ const CardsHolder = () => {
 			showSingle={showSingle}
 			data-testid="cards-holder"
 		>
-			{showSingle && !isLoading && !isError && (
+			{showSingle && !isLoading && (
 				<div className="cards-holder-nav-bar">
 					<Button
 						aria="button to close the pokemon card and go back to showcase all cards"
@@ -58,7 +58,7 @@ const CardsHolder = () => {
 							)
 						}
 						content={<BiLeftArrow />}
-						disabled={singleCard.pokeData.id === 1}
+						disabled={isError || singleCard.speciesData.id === 1}
 					/>
 					<Button
 						aria="button to go to the next pokemon"
@@ -70,7 +70,7 @@ const CardsHolder = () => {
 							)
 						}
 						content={<BiRightArrow />}
-						disabled={singleCard.pokeData.id === 898}
+						disabled={isError || singleCard.speciesData.id === 898}
 					/>
 				</div>
 			)}
