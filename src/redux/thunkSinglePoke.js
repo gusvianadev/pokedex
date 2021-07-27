@@ -1,4 +1,4 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, current } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const getSinglePoke = createAsyncThunk(
@@ -39,7 +39,7 @@ const getSinglePoke = createAsyncThunk(
 
 			return pokeToSearch;
 		};
-
+		let currentName = fixedNameStr();
 		// FUNCTIONS //
 		const fetchSpeciesFirst = async (poke) => {
 			const resSpeciesData = await axios(`${speciesUrl}${poke}`);
@@ -60,27 +60,26 @@ const getSinglePoke = createAsyncThunk(
 			pokeData = await resPokeData.data;
 			speciesData = await resSpeciesData.data;
 		};
+
+		// fetching
 		try {
-			// first just fetch the fixed name
-			await fetchSpeciesFirst(fixedNameStr());
+			await fetchSpeciesFirst(currentName);
 		} catch (e) {
-			// if it fails, it means that the user wrote a wrong name/id or
-			// that they're searching for a pokemon variant, so let's search a variant
+			// the user is searching for a variant
 			try {
 				// it's the same, but you have to search the pokemon first
 				// because variants can't be searched in species
-				await fetchPokeDataFirst(fixedNameStr());
+				await fetchPokeDataFirst(currentName);
 			} catch (e2) {
-				// if it didn't work, it means that the user wrote a wrong name/id
-				// or they're searching in the wrong order (e.g. 'alola raichu' instead of 'raichu alola')
-				// so, let's reverse that order
-				const reversedName = fixedNameStr().split('-').reverse();
+				// the user wrote the name backwards or the variant backwards
+				// (e.g. 'alola pikachu' instead of 'pikachu alola')
+				// warning: don't use arr.reverse() because some names have 3 parts
+				currentName = currentName.split('-');
+				currentName.unshift(currentName.pop());
+				currentName = currentName.join('-');
 				try {
-					// fetch the reversed name
-					await fetchPokeDataFirst(reversedName.join('-'));
+					await fetchPokeDataFirst(currentName);
 				} catch (e3) {
-					// if it didn't work, it means that the user wrote a
-					// wrong name/id
 					throw new Error(e3);
 				}
 			}
