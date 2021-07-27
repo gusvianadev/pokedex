@@ -14,9 +14,10 @@ const getSinglePoke = createAsyncThunk(
 			.replaceAll('galarian', 'galar')
 			// you can add here as much correction as you want
 			.split('-');
+
+		// this also allows the user to search incomplete names as long as it
+		// gives only one result. E.g.: 'pik ro' will be 'pikachu-rock-star'
 		const filteredPokemon = allPokes
-			// this also allows the user to search incomplete names as long as it
-			// gives only one result. E.g.: 'pik ro' will be 'pikachu-rock-star'
 			.filter((poke) => fixedText.every((el) => poke.includes(el)))
 			.join('-');
 		let pokeData;
@@ -24,8 +25,13 @@ const getSinglePoke = createAsyncThunk(
 		// because if i'ts a number or a single name, then the user is searching
 		// for a normal pokemon, otherwise it's searching for a variant, and
 		// in that case, it has to be done the other way
-		if (typeof pokeToSearch === 'number' || fixedText.length === 1) {
-			const resSpeciesData = await axios(speciesDataUrl + fixedText);
+		if (
+			Number.isNaN(parseInt(pokeToSearch, 10)) ||
+			fixedText.length === 1
+		) {
+			const resSpeciesData = Number.isNaN(parseInt(pokeToSearch, 10))
+				? await axios(speciesDataUrl + filteredPokemon)
+				: await axios(speciesDataUrl + pokeToSearch);
 			const resPokeData = await axios(
 				pokeDataUrl + resSpeciesData.data.id
 			);
