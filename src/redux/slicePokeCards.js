@@ -12,6 +12,7 @@ export const pokeCardsSlice = createSlice({
 		showSingle: false,
 		isLoading: false,
 		isError: false,
+		allPokes: [],
 		pokeCards: [],
 		singleCard: {},
 	},
@@ -37,6 +38,7 @@ export const pokeCardsSlice = createSlice({
 		[getPokeList.fulfilled]: (state, { payload }) => {
 			state.fetchMore = false;
 			state.isLoading = false;
+			state.allPokes = [...payload.allPokes];
 			state.pokeCards.push(...payload.pokeList);
 			state.nextUrl = payload.nextUrl;
 		},

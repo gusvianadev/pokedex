@@ -1,88 +1,37 @@
-import { createAsyncThunk, current } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const getSinglePoke = createAsyncThunk(
 	'singlePoke/getSinglePoke',
-	async (pokeToSearch) => {
-		// VARIABLES //
+	async (pokeToSearch, { getState }) => {
 		const pokeDataUrl = 'https://pokeapi.co/api/v2/pokemon/';
-		const speciesUrl = 'https://pokeapi.co/api/v2/pokemon-species/';
+		const speciesDataUrl = 'https://pokeapi.co/api/v2/pokemon-species/';
+		const { allPokes } = getState().pokeCards;
+		const fixedText = pokeToSearch
+			.toString()
+			.replaceAll(' ', '-')
+			.replaceAll('alolan', 'alola')
+			.replaceAll('galarian', 'galar')
+			.split('-');
+		const filteredPokemon = allPokes
+			.filter((poke) => fixedText.every((el) => poke.includes(el)))
+			.join('-');
 		let pokeData;
 		let speciesData;
-		const fixedNameStr = () => {
-			let toFix = pokeToSearch;
-
-			// first check if the user is searching for a name or id
-			if (typeof pokeToSearch !== 'number') {
-				// this replaces spaces with '-'
-				const removeSpaces = toFix.replaceAll(' ', '-');
-				toFix = removeSpaces;
-
-				const fixedName = toFix
-					.split('-') // transform the str into arr
-					.map((element) => {
-						// check if the user wrote 'galarian' or 'alolan'
-						if (element === 'galarian') {
-							return 'galar';
-						}
-
-						if (element === 'alolan') {
-							return 'alola';
-						}
-
-						return element;
-					})
-					.join('-'); // transform the array back to string
-
-				return fixedName;
-			}
-
-			return pokeToSearch;
-		};
-		let currentName = fixedNameStr();
-		// FUNCTIONS //
-		const fetchSpeciesFirst = async (poke) => {
-			const resSpeciesData = await axios(`${speciesUrl}${poke}`);
+		if (typeof pokeToSearch === 'number' || fixedText.length === 1) {
+			const resSpeciesData = await axios(speciesDataUrl + fixedText);
 			const resPokeData = await axios(
-				`${pokeDataUrl}${resSpeciesData.data.id}`
+				pokeDataUrl + resSpeciesData.data.id
 			);
 
 			speciesData = await resSpeciesData.data;
 			pokeData = await resPokeData.data;
-		};
-
-		const fetchPokeDataFirst = async (poke) => {
-			const resPokeData = await axios(`${pokeDataUrl}${poke}`);
-			const resSpeciesData = await axios(
-				`${speciesUrl}${resPokeData.data.species.name}`
-			);
+		} else {
+			const resPokeData = await axios(pokeDataUrl + filteredPokemon);
+			const resSpeciesData = await axios(resPokeData.data.species.url);
 
 			pokeData = await resPokeData.data;
 			speciesData = await resSpeciesData.data;
-		};
-
-		// fetching
-		try {
-			await fetchSpeciesFirst(currentName);
-		} catch (e) {
-			// the user is searching for a variant
-			try {
-				// it's the same, but you have to search the pokemon first
-				// because variants can't be searched in species
-				await fetchPokeDataFirst(currentName);
-			} catch (e2) {
-				// the user wrote the name backwards or the variant backwards
-				// (e.g. 'alola pikachu' instead of 'pikachu alola')
-				// warning: don't use arr.reverse() because some names have 3 parts
-				currentName = currentName.split('-');
-				currentName.unshift(currentName.pop());
-				currentName = currentName.join('-');
-				try {
-					await fetchPokeDataFirst(currentName);
-				} catch (e3) {
-					throw new Error(e3);
-				}
-			}
 		}
 
 		return { pokeData, speciesData };
