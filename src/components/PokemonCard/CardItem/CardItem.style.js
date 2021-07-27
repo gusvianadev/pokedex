@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ItemContainerSty = styled.div`
-	overflow: auto;
+	overflow: ${(props) => props.typeOfContent === 'flavor-text' && 'auto'};
 	display: flex;
 	border: 1px solid black;
 	padding: ${(props) =>

@@ -53,7 +53,9 @@ const CardsHolder = () => {
 						type="button"
 						btnStyles={upperSideBtnStyles}
 						onClick={() =>
-							dispatch(getSinglePoke(singleCard.pokeData.id - 1))
+							dispatch(
+								getSinglePoke(singleCard.speciesData.id - 1)
+							)
 						}
 						content={<BiLeftArrow />}
 						disabled={singleCard.pokeData.id === 1}
@@ -63,7 +65,9 @@ const CardsHolder = () => {
 						type="button"
 						btnStyles={upperSideBtnStyles}
 						onClick={() =>
-							dispatch(getSinglePoke(singleCard.pokeData.id + 1))
+							dispatch(
+								getSinglePoke(singleCard.speciesData.id + 1)
+							)
 						}
 						content={<BiRightArrow />}
 						disabled={singleCard.pokeData.id === 898}

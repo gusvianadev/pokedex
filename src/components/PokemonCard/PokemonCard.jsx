@@ -15,12 +15,17 @@ const PokemonCard = ({ pokeName, id }) => {
 		<PokemonCardSty
 			id={`${pokeName}-pokemon-card`}
 			onClick={() => {
-				!showSingle && dispatch(getSinglePoke(pokeName));
-				dispatch(setShowSingle(true));
+				!showSingle &&
+					dispatch(getSinglePoke(pokeName)) &&
+					dispatch(setShowSingle(true));
 			}}
 			showSingle={showSingle}
 		>
-			<CardItem pokeName={pokeName} id="number" content={id} />
+			<CardItem
+				pokeName={pokeName}
+				id="number"
+				content={!showSingle ? id : singleCard.speciesData.id}
+			/>
 			<CardItem
 				pokeName={pokeName}
 				id="sprite"
@@ -32,7 +37,11 @@ const PokemonCard = ({ pokeName, id }) => {
 					/>
 				}
 			/>
-			<CardItem pokeName={pokeName} id="name" content={pokeName} />
+			<CardItem
+				pokeName={pokeName}
+				id="name"
+				content={pokeName.replaceAll('-', ' ')}
+			/>
 			{showSingle && (
 				<>
 					<CardItem
