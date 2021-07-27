@@ -72,10 +72,9 @@ const getSinglePoke = createAsyncThunk(
 				await fetchPokeDataFirst(fixedNameStr());
 			} catch (e2) {
 				// if it didn't work, it means that the user wrote a wrong name/id
-				// or they're searching in the wrong order (e.g 'alola raichu' instead of 'raichu alola')
+				// or they're searching in the wrong order (e.g. 'alola raichu' instead of 'raichu alola')
 				// so, let's reverse that order
 				const reversedName = fixedNameStr().split('-').reverse();
-
 				try {
 					// fetch the reversed name
 					await fetchPokeDataFirst(reversedName.join('-'));

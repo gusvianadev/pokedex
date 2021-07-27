@@ -5,6 +5,7 @@ const SearchBarSty = styled.form`
 	margin: 0 auto;
 	display: flex;
 	justify-content: flex-start;
+	padding-right: 0.2rem;
 
 	& input {
 		margin: 0 0.5rem 0 0;

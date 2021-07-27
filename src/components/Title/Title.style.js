@@ -12,6 +12,7 @@ const TitleSty = styled.h1`
 	-webkit-text-stroke: 3px var(--clr-blue);
 	position: relative;
 	user-select: none;
+	cursor: pointer;
 
 	& .title-character {
 		display: inline-block;

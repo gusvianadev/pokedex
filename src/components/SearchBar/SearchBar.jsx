@@ -8,6 +8,7 @@ import getSinglePoke from '../../redux/thunkSinglePoke';
 const SearchBar = () => {
 	const dispatch = useDispatch();
 	const [pokeToSearch, setPokeToSearch] = useState('');
+
 	return (
 		<SearchBarSty
 			onSubmit={(e) => {
@@ -29,10 +30,10 @@ const SearchBar = () => {
 				aria="search pokémon from the searchbar"
 				type="submit"
 				testid="search-more-btn"
-				styles={{
+				btnStyles={{
 					width: '18%',
 					maxWidth: 'auto',
-					padding: '.5rem 0',
+					padding: '0.5rem',
 				}}
 				content={<FaSearch />}
 			/>
