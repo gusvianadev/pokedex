@@ -15,7 +15,7 @@ const getSinglePoke = createAsyncThunk(
 			// first check if the user is searching for a name or id
 			if (typeof pokeToSearch !== 'number') {
 				// this replaces spaces with '-'
-				const removeSpaces = toFix.replace(' ', '-');
+				const removeSpaces = toFix.replaceAll(' ', '-');
 				toFix = removeSpaces;
 
 				const fixedName = toFix
