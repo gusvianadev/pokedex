@@ -26,11 +26,11 @@ const getSinglePoke = createAsyncThunk(
 		// for a normal pokemon, otherwise it's searching for a variant, and
 		// in that case, it has to be done the other way
 		if (
-			Number.isNaN(parseInt(pokeToSearch, 10)) ||
+			!Number.isNaN(parseInt(pokeToSearch, 10)) ||
 			fixedText.length === 1
 		) {
 			const resSpeciesData = Number.isNaN(parseInt(pokeToSearch, 10))
-				? await axios(speciesDataUrl + filteredPokemon)
+				? await axios(speciesDataUrl + filteredPokemon.split('-')[0])
 				: await axios(speciesDataUrl + pokeToSearch);
 			const resPokeData = await axios(
 				pokeDataUrl + resSpeciesData.data.id
