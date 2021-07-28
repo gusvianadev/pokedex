@@ -33,13 +33,14 @@ const CardsHolder = () => {
 		minHeight: '25px',
 		margin: '0px',
 	};
+
 	return (
 		<CardsHolderSty
 			isLoading={isLoading}
 			showSingle={showSingle}
 			data-testid="cards-holder"
 		>
-			{showSingle && !isLoading && (
+			{showSingle && (
 				<div className="cards-holder-nav-bar">
 					<Button
 						aria="button to close the pokemon card and go back to showcase all cards"
@@ -58,7 +59,12 @@ const CardsHolder = () => {
 							)
 						}
 						content={<BiLeftArrow />}
-						disabled={isError || singleCard.speciesData.id === 1}
+						disabled={
+							isLoading ||
+							isError ||
+							singleCard.speciesData.id === 1
+						}
+						isLoading={isLoading}
 					/>
 					<Button
 						aria="button to go to the next pokemon"
@@ -70,7 +76,12 @@ const CardsHolder = () => {
 							)
 						}
 						content={<BiRightArrow />}
-						disabled={isError || singleCard.speciesData.id === 898}
+						disabled={
+							isLoading ||
+							isError ||
+							singleCard.speciesData.id === 898
+						}
+						isLoading={isLoading}
 					/>
 				</div>
 			)}

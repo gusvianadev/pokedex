@@ -37,7 +37,8 @@ const ButtonSty = styled.button`
 	}
 
 	:disabled {
-		background-color: var(--clr-red);
+		background-color: ${(props) =>
+			props.isLoading ? 'var(--clr-yellow)' : 'var(--clr-red)'};
 		pointer-events: none;
 	}
 `;

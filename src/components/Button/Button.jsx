@@ -8,6 +8,7 @@ const Button = ({
 	onClick,
 	content,
 	disabled,
+	isLoading,
 }) => (
 	<ButtonSty
 		type={type}
@@ -16,6 +17,7 @@ const Button = ({
 		onClick={onClick}
 		props={btnStyles}
 		disabled={disabled}
+		isLoading={isLoading}
 	>
 		{content}
 	</ButtonSty>

@@ -12,6 +12,8 @@ const getSinglePoke = createAsyncThunk(
 			.replaceAll(' ', '-')
 			.replaceAll('alolan', 'alola')
 			.replaceAll('galarian', 'galar')
+			.replaceAll('galaria', 'galar')
+			.replaceAll('galari', 'galar')
 			// you can add here as much correction as you want
 			.split('-');
 
@@ -22,10 +24,10 @@ const getSinglePoke = createAsyncThunk(
 			.join('-');
 		let pokeData;
 		let speciesData;
-		// because if i'ts a number or a single name, then the user is searching
-		// for a normal pokemon, otherwise it's searching for a variant, and
-		// in that case, it has to be done the other way
+
 		if (
+			// this is to check if the user is searching with an ID or a poke
+			// with a single name
 			!Number.isNaN(parseInt(pokeToSearch, 10)) ||
 			fixedText.length === 1
 		) {
@@ -39,6 +41,8 @@ const getSinglePoke = createAsyncThunk(
 			speciesData = await resSpeciesData.data;
 			pokeData = await resPokeData.data;
 		} else {
+			// if above was false, then they're searching for a variant and
+			// has to be done this way
 			const resPokeData = await axios(pokeDataUrl + filteredPokemon);
 			const resSpeciesData = await axios(resPokeData.data.species.url);
 
