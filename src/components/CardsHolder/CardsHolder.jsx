@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ImCross } from 'react-icons/im';
 import { BiLeftArrow, BiRightArrow } from 'react-icons/bi';
 import PokemonCard from '../PokemonCard/PokemonCard';
@@ -23,10 +23,20 @@ const CardsHolder = () => {
 		singleCard,
 	} = useSelector((state) => state.pokeCards);
 	const dispatch = useDispatch();
+	const cardsHolderRef = useRef(0);
+	const [scrollTopPosition, setScrollTopPosition] = useState('');
 
 	useEffect(() => {
 		fetchMore && !isLoading && dispatch(getPokeList(currentUrl));
-	}, [dispatch, fetchMore, isLoading, currentUrl]);
+		!showSingle && cardsHolderRef.current.scroll(0, scrollTopPosition);
+	}, [
+		dispatch,
+		fetchMore,
+		isLoading,
+		currentUrl,
+		showSingle,
+		cardsHolderRef,
+	]);
 
 	const upperSideBtnStyles = {
 		width: '40px',
@@ -38,7 +48,7 @@ const CardsHolder = () => {
 		<CardsHolderSty
 			isLoading={isLoading}
 			showSingle={showSingle}
-			data-testid="cards-holder"
+			ref={cardsHolderRef}
 		>
 			{showSingle && (
 				<div className="cards-holder-nav-bar">
@@ -93,6 +103,8 @@ const CardsHolder = () => {
 								key={name}
 								pokeName={name}
 								id={i + 1}
+								setScrollTopPosition={setScrollTopPosition}
+								cardsHolderRef={cardsHolderRef}
 							/>
 					  ))
 					: !isLoading &&
@@ -120,7 +132,12 @@ const CardsHolder = () => {
 								maxWidth: '150px',
 								padding: '0.5rem 0',
 							}}
-							onClick={() => dispatch(changeCurrentUrl(nextUrl))}
+							onClick={() =>
+								dispatch(changeCurrentUrl(nextUrl)) &&
+								setScrollTopPosition(
+									cardsHolderRef.current.scrollTop
+								)
+							}
 							content={<p>more+</p>}
 						/>
 					)}

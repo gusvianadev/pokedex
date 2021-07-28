@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const PokemonCardSty = styled.div`
 	width: ${(props) => (!props.showSingle ? '220px' : '100%')};
 	height: ${(props) => (!props.showSingle ? '240px' : '95%')};
+	max-height: 525px;
 	margin: ${(props) =>
 		!props.showSingle ? '0rem auto 1.5rem auto' : 'auto'};
 	border: 1px solid black;

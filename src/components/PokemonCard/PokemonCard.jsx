@@ -6,7 +6,12 @@ import { setShowSingle } from '../../redux/slicePokeCards';
 import getSinglePoke from '../../redux/thunkSinglePoke';
 import CardItem from './CardItem/CardItem';
 
-const PokemonCard = ({ pokeName, id }) => {
+const PokemonCard = ({
+	pokeName,
+	id,
+	setScrollTopPosition,
+	cardsHolderRef,
+}) => {
 	const { showSingle, singleCard } = useSelector((state) => state.pokeCards);
 	const { pokeData, speciesData } = singleCard;
 	const dispatch = useDispatch();
@@ -17,6 +22,7 @@ const PokemonCard = ({ pokeName, id }) => {
 			onClick={() => {
 				!showSingle &&
 					dispatch(getSinglePoke(pokeName)) &&
+					setScrollTopPosition(cardsHolderRef.current.scrollTop) &&
 					dispatch(setShowSingle(true));
 			}}
 			showSingle={showSingle}
