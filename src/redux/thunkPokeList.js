@@ -9,9 +9,15 @@ const getPokeList = createAsyncThunk(
 		);
 		const resPokeList = await axios(currentUrl);
 
-		const allPokes = await resAllPokes.data.results.map(
-			(poke) => poke.name
-		);
+		const allPokes = await resAllPokes.data.results.map((poke) => {
+			const pokeObj = {
+				name: poke.name,
+				id: poke.url
+					.replaceAll('https://pokeapi.co/api/v2/pokemon/', '')
+					.replaceAll('/', ''),
+			};
+			return pokeObj;
+		});
 		const nextUrl = await resPokeList.data.next;
 		const pokesToFetch = await resPokeList.data.results;
 		const pokeList = pokesToFetch.map((poke) => poke.name);

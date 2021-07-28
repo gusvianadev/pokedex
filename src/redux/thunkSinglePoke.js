@@ -20,7 +20,8 @@ const getSinglePoke = createAsyncThunk(
 		// this also allows the user to search incomplete names as long as it
 		// gives only one result. E.g.: 'pik ro' will be 'pikachu-rock-star'
 		const filteredPokemon = allPokes
-			.filter((poke) => fixedText.every((el) => poke.includes(el)))
+			.filter((poke) => fixedText.every((el) => poke.name.includes(el)))
+			.map((poke) => poke.name)
 			.join('-');
 		let pokeData;
 		let speciesData;

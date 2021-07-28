@@ -11,7 +11,6 @@ const CardsHolderSty = styled.div`
 	display: flex;
 	flex-direction: column;
 	padding-bottom: 0.3rem;
-    scroll-behavior: smooth;
 
 	& .cards-holder-nav-bar {
 		display: flex;
