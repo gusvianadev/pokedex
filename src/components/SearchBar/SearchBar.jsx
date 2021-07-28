@@ -34,9 +34,14 @@ const SearchBar = () => {
 				onChange={(e) => {
 					setPokeToSearch(e.target.value);
 					if (!Number.isNaN(parseInt(e.target.value, 10))) {
-						setPossibleMatches(
-							checkMatches(allPokes, e.target.value.trim())
-						);
+						parseInt(e.target.value, 10) <= 898
+							? setPossibleMatches(
+									checkMatches(
+										allPokes,
+										e.target.value.trim()
+									)
+							  )
+							: setPossibleMatches([]);
 						return null;
 					}
 
