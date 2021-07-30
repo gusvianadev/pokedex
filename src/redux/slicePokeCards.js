@@ -29,7 +29,7 @@ export const pokeCardsSlice = createSlice({
 		},
 	},
 	extraReducers: {
-		//* poke list
+		// poke list
 		[getPokeList.pending]: (state) => {
 			state.fetchMore = false;
 			state.isLoading = true;
@@ -47,7 +47,7 @@ export const pokeCardsSlice = createSlice({
 			state.isError = true;
 		},
 
-		//* single poke card
+		// single poke card
 		[getSinglePoke.pending]: (state) => {
 			state.isLoading = true;
 			state.showSingle = true;

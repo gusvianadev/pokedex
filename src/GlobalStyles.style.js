@@ -56,7 +56,12 @@ const GlobalStyles = createGlobalStyle`
     button {
         all: unset;
         background-color: lightgray;
+
+       :focus {
+            border: 3px solid darkblue;
+        }
     }
+    
 
     img {
         width: 100%;

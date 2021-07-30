@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const ItemContainerSty = styled.div`
-	overflow-y: ${(props) => props.typeOfContent === 'flavor-text' && 'auto'};
+	overflow-y: ${(props) =>
+		props.typeOfContent === 'flavor-text' ? 'auto' : 'hidden'};
 	overflow-x: auto;
 	display: flex;
 	border: 1px solid black;
@@ -147,7 +148,7 @@ export const CardItemSty = styled.div`
 	}
 
 	& * {
-		overflow-y: auto;
+	overflow-y: ${(props) => props.typeOfContent === 'flavor-text' && 'auto'};
 		overflow-x: hidden;
 	}
 

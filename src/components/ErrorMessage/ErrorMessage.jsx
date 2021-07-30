@@ -1,10 +1,8 @@
 import ErrorMessageContainerSty from './ErrorMessage.style';
 
-const ErrorMessage = () => (
-	<ErrorMessageContainerSty>
-		<div className="error-message">
-			Sorry, we couldn&apos;t find what you&apos;re looking for ☹
-		</div>
+const ErrorMessage = ({ content, errMessSty }) => (
+	<ErrorMessageContainerSty errMessSty={errMessSty}>
+		<div className="error-message">{content}</div>
 	</ErrorMessageContainerSty>
 );
 export default ErrorMessage;

@@ -1,6 +1,5 @@
-// import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { useDispatch, useSelector } from 'react-redux';
-import PokemonSprite from './PokemonSprite/PokemonSprite';
+import PokemonSprite from '../PokemonSprite/PokemonSprite';
 import PokemonCardSty from './PokemonCard.style';
 import { setShowSingle } from '../../redux/slicePokeCards';
 import getSinglePoke from '../../redux/thunkSinglePoke';
@@ -37,8 +36,12 @@ const PokemonCard = ({
 				id="sprite"
 				content={
 					<PokemonSprite
-						sprite={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`}
-						pokeName={pokeName}
+						src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`}
+						alt={`sprite of ${pokeName}`}
+						spriteStyles={{
+							width: '110px',
+							height: '110px',
+						}}
 						id={id}
 					/>
 				}

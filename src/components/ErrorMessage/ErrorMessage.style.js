@@ -6,7 +6,8 @@ const ErrorMessageContainerSty = styled.div`
 	display: flex;
 
 	& .error-message {
-		width: fit-content;
+		width: ${(props) =>
+			props.errMessSty ? props.errMessSty.width : 'fit-content'};
 		height: fit-content;
 		margin: auto;
 		background-color: gray;

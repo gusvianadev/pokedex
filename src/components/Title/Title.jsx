@@ -5,10 +5,7 @@ import { setShowSingle } from '../../redux/slicePokeCards';
 const Title = () => {
 	const dispatch = useDispatch();
 	return (
-		<TitleSty
-			onClick={() => dispatch(setShowSingle(false))}
-			data-testid="app-title"
-		>
+		<TitleSty onClick={() => dispatch(setShowSingle(false))}>
 			<p className="title-character title-character-1">P</p>
 			<p className="title-character title-character-2 title-character__on-top">
 				o

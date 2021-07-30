@@ -19,6 +19,7 @@ const CardsHolder = () => {
 		showSingle,
 		isLoading,
 		isError,
+		allPokes,
 		pokeCards,
 		singleCard,
 	} = useSelector((state) => state.pokeCards);
@@ -95,14 +96,19 @@ const CardsHolder = () => {
 					/>
 				</div>
 			)}
-			{isError && <ErrorMessage />}
-			<div data-testid="cards-container" className="container cards">
+			{isError && (
+				<ErrorMessage
+					content="Sorry, we couldn't find what you're looking for ☹
+" // I hate you Prettier why is that quote alone please get back her with her friends
+				/>
+			)}
+			<div className="container cards">
 				{!showSingle && !isError
 					? pokeCards.map((name, i) => (
 							<PokemonCard
 								key={name}
 								pokeName={name}
-								id={i + 1}
+								id={allPokes[i].id}
 								setScrollTopPosition={setScrollTopPosition}
 								cardsHolderRef={cardsHolderRef}
 							/>
@@ -116,7 +122,7 @@ const CardsHolder = () => {
 					  )}
 			</div>
 			<div className="container ldn-ring-container">
-				{isLoading && <LoadingRing data-testid="ldn-ring" />}
+				{isLoading && <LoadingRing />}
 			</div>
 			<div className="container button-container">
 				{!isLoading &&
@@ -126,7 +132,6 @@ const CardsHolder = () => {
 						<Button
 							aria="search more pokémon button"
 							type="button"
-							testid="search-more-btn"
 							btnStyles={{
 								width: '100%',
 								maxWidth: '150px',
