@@ -10,7 +10,7 @@ const BackgroundScreenSty = styled.div`
 	border-radius: 15px;
 	background-image: url(${backgroundSquarePattern});
 	-webkit-box-shadow: inset 5px 5px 2px 2px #6f6f6f, 5px 5px 2px 2px #5b0000;
-	box-shadow: inset 5px 5px 2px 2px #6f6f6f, 5px 5px 2px 2px #5b0000;
+	box-shadow: inset 5px 5px 2px 2px #404040, 5px 5px 2px 2px #5b0000;
 
 	:before {
 		content: '';

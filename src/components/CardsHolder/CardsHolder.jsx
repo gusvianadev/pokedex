@@ -1,15 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
-import { ImCross } from 'react-icons/im';
-import { BiLeftArrow, BiRightArrow } from 'react-icons/bi';
 import PokemonCard from '../PokemonCard/PokemonCard';
 import CardsHolderSty from './CardsHolder.styles';
 import LoadingRing from '../LoadingRing/LoadingRing';
 import getPokeList from '../../redux/thunkPokeList';
-import getSinglePoke from '../../redux/thunkSinglePoke';
-import { changeCurrentUrl, setShowSingle } from '../../redux/slicePokeCards';
+import { changeCurrentUrl } from '../../redux/slicePokeCards';
 import Button from '../Button/Button';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import NavBar from '../NavBar/NavBar';
 
 const CardsHolder = () => {
 	const {
@@ -24,26 +22,13 @@ const CardsHolder = () => {
 		singleCard,
 	} = useSelector((state) => state.pokeCards);
 	const dispatch = useDispatch();
-	const cardsHolderRef = useRef(0);
-	const [scrollTopPosition, setScrollTopPosition] = useState('');
+	const cardsHolderRef = useRef(null);
+	const [scrollTopPosition, setScrollTopPosition] = useState(0);
 
 	useEffect(() => {
 		fetchMore && !isLoading && dispatch(getPokeList(currentUrl));
 		!showSingle && cardsHolderRef.current.scroll(0, scrollTopPosition);
-	}, [
-		dispatch,
-		fetchMore,
-		isLoading,
-		currentUrl,
-		showSingle,
-		cardsHolderRef,
-	]);
-
-	const upperSideBtnStyles = {
-		width: '40px',
-		minHeight: '25px',
-		margin: '0px',
-	};
+	}, [fetchMore, isLoading, currentUrl, showSingle]);
 
 	return (
 		<CardsHolderSty
@@ -52,49 +37,11 @@ const CardsHolder = () => {
 			ref={cardsHolderRef}
 		>
 			{showSingle && (
-				<div className="cards-holder-nav-bar">
-					<Button
-						aria="button to close the pokemon card and go back to showcase all cards"
-						type="button"
-						btnStyles={upperSideBtnStyles}
-						onClick={() => dispatch(setShowSingle(false))}
-						content={<ImCross />}
-					/>
-					<Button
-						aria="button to go to the previous pokemon"
-						type="button"
-						btnStyles={upperSideBtnStyles}
-						onClick={() =>
-							dispatch(
-								getSinglePoke(singleCard.speciesData.id - 1)
-							)
-						}
-						content={<BiLeftArrow />}
-						disabled={
-							isLoading ||
-							isError ||
-							singleCard.speciesData.id === 1
-						}
-						isLoading={isLoading}
-					/>
-					<Button
-						aria="button to go to the next pokemon"
-						type="button"
-						btnStyles={upperSideBtnStyles}
-						onClick={() =>
-							dispatch(
-								getSinglePoke(singleCard.speciesData.id + 1)
-							)
-						}
-						content={<BiRightArrow />}
-						disabled={
-							isLoading ||
-							isError ||
-							singleCard.speciesData.id === 898
-						}
-						isLoading={isLoading}
-					/>
-				</div>
+				<NavBar
+					singleCard={singleCard}
+					isLoading={isLoading}
+					isError={isError}
+				/>
 			)}
 			{isError && (
 				<ErrorMessage
@@ -121,32 +68,32 @@ const CardsHolder = () => {
 							/>
 					  )}
 			</div>
-			<div className="container ldn-ring-container">
-				{isLoading && <LoadingRing />}
-			</div>
-			<div className="container button-container">
-				{!isLoading &&
-					pokeCards.length !== 0 &&
-					!showSingle &&
-					!isError && (
-						<Button
-							aria="search more pokémon button"
-							type="button"
-							btnStyles={{
-								width: '100%',
-								maxWidth: '150px',
-								padding: '0.5rem 0',
-							}}
-							onClick={() =>
-								dispatch(changeCurrentUrl(nextUrl)) &&
-								setScrollTopPosition(
-									cardsHolderRef.current.scrollTop
-								)
-							}
-							content={<p>more+</p>}
-						/>
-					)}
-			</div>
+			{isLoading && (
+				<div className="container ldn-ring-container">
+					<LoadingRing />
+				</div>
+			)}
+
+			{!isLoading && pokeCards.length !== 0 && !showSingle && !isError && (
+				<div className="container button-container">
+					<Button
+						aria="search more pokémon button"
+						type="button"
+						btnStyles={{
+							width: '100%',
+							maxWidth: '150px',
+							padding: '0.5rem 0',
+						}}
+						onClick={() =>
+							dispatch(changeCurrentUrl(nextUrl)) &&
+							setScrollTopPosition(
+								cardsHolderRef.current.scrollTop
+							)
+						}
+						content={<p>more</p>}
+					/>
+				</div>
+			)}
 		</CardsHolderSty>
 	);
 };
