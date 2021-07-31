@@ -6,7 +6,7 @@ const PokemonSprite = ({ id, alt, spriteStyles }) => {
 	/* Some sprites explanation:
 	 * If I want the best possible src, I should fetch every single poke and
 	 * then take the src from there, but that'd be too slow, so instead I have
-	 * all 3 possible src. It's a 90% effective system, but has one flaw:
+	 * all 3 possible src. It's a 90% effective system, because it has one flaw:
 	 * some src instead of being just the poke id, it's actually
 	 * the poke-species id plus the variation name. I could make a function to try
 	 * and get that, but right now I don't have the time. I'm gonna do it later if

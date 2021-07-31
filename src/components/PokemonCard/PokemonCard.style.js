@@ -6,7 +6,7 @@ const PokemonCardSty = styled.div`
 	max-height: 525px;
 	margin: ${(props) =>
 		!props.showSingle ? '0rem auto 1.5rem auto' : 'auto'};
-	border: 1px solid black;
+	border: 2px solid black;
 	border-radius: 12px;
 	letter-spacing: 3px;
 	background-color: white;
@@ -16,6 +16,11 @@ const PokemonCardSty = styled.div`
 
 	:hover {
 		cursor: ${(props) => !props.showSingle && 'pointer'};
+	}
+
+	:focus {
+		border: 2px solid red;
+		outline: none;
 	}
 
 	@media (min-width: 576px) {

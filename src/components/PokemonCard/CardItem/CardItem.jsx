@@ -1,21 +1,25 @@
-import { useSelector } from 'react-redux';
 import { CardItemSty, ItemContainerSty } from './CardItem.style';
 import CardItemFunctions from './CardItemFunctions';
 
-const CardItem = ({ pokeName, id, content }) => {
-	const { contentToShow } = CardItemFunctions({ pokeName, id, content });
-	const { showSingle } = useSelector((state) => state.pokeCards);
+const CardItem = ({ pokeName, pokeId, cardItem, showSingle }) => {
+	const { contentToShow } = CardItemFunctions({
+		pokeName,
+		pokeId,
+		cardItem,
+		showSingle,
+	});
+
 	return (
 		<ItemContainerSty
 			showSingle={showSingle}
-			typeOfContent={id}
-			className={`${id}-container`}
+			typeOfContent={cardItem}
+			className={`${cardItem}-container`}
 		>
 			<CardItemSty
 				showSingle={showSingle}
-				typeOfContent={id}
-				id={`${id}-of-${pokeName}`}
-				className={`${id}-item`}
+				typeOfContent={cardItem}
+				id={`${cardItem}-of-${pokeName}`}
+				className={`${cardItem}-item`}
 			>
 				{contentToShow}
 			</CardItemSty>

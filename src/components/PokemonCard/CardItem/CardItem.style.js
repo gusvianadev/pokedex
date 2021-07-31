@@ -17,11 +17,11 @@ export const ItemContainerSty = styled.div`
 	border-radius: ${(props) => {
 		const content = props.typeOfContent;
 		if (!props.showSingle) {
-			return content === 'number'
+			return content === 'poke-id'
 				? '10px 10px 0px 0px'
-				: content === 'name' && '0px 0px 10px 10px';
+				: content === 'poke-name' && '0px 0px 10px 10px';
 		}
-		return content === 'number'
+		return content === 'poke-id'
 			? '10px 10px 0px 0px'
 			: content === 'flavor-text' && '0px 0px 10px 10px';
 	}};
@@ -40,19 +40,19 @@ export const ItemContainerSty = styled.div`
 			if (!single) {
 				return 'auto';
 			}
-			if (content === 'sprite') {
-				return '1/2';
+			switch (content) {
+				case 'sprite':
+					return '1/2';
+				case 'poke-id':
+					return '2/3';
+				case 'poke-name':
+					return '3/4';
+				case 'flavor-text':
+					return '1/4';
+
+				default:
+					return '2/4';
 			}
-			if (content === 'number') {
-				return '2/3';
-			}
-			if (content === 'name') {
-				return '3/4';
-			}
-			if (content === 'flavor-text') {
-				return '1/4';
-			}
-			return '2/4';
 		}};
 		grid-row: ${(props) => {
 			const content = props.typeOfContent;
@@ -61,48 +61,45 @@ export const ItemContainerSty = styled.div`
 			if (!single) {
 				return 'auto';
 			}
-			if (content === 'sprite') {
-				return '1/6';
+			switch (content) {
+				case 'sprite':
+					return '1/6';
+				case 'poke-id':
+				case 'poke-name':
+					return '1/2';
+				case 'category':
+					return '2/3';
+				case 'types':
+					return '3/4';
+				case 'height':
+					return '4/5';
+				case 'weight':
+					return '5/6';
+				default:
+					return '6/7';
 			}
-			if (content === 'number' || content === 'name') {
-				return '1/2';
-			}
-			if (content === 'category') {
-				return '2/3';
-			}
-			if (content === 'types') {
-				return '3/4';
-			}
-			if (content === 'height') {
-				return '4/5';
-			}
-			if (content === 'weight') {
-				return '5/6';
-			}
-			return '6/7';
 		}};
 		border-left: ${(props) =>
-			props.showSingle && props.typeOfContent === 'name' && 'none'};
+			props.showSingle && props.typeOfContent === 'poke-name' && 'none'};
 		border-right: ${(props) =>
-			props.showSingle && props.typeOfContent === 'number' && 'none'};
+			props.showSingle && props.typeOfContent === 'poke-id' && 'none'};
 		border-radius: ${(props) => {
 			const content = props.typeOfContent;
 			if (!props.showSingle) {
-				return content === 'number'
+				return content === 'poke-id'
 					? '10px 10px 0px 0px'
-					: content === 'name' && '0px 0px 10px 10px';
+					: content === 'poke-name' && '0px 0px 10px 10px';
 			}
-			if (content === 'name') {
-				return '0px 10px 0px 0px';
+			switch (content) {
+				case 'poke-name':
+					return '0px 10px 0px 0px';
+				case 'flavor-text':
+					return '0px 0px 10px 10px';
+				case 'sprite':
+					return '10px 0px 0px 0px';
+				default:
+					return '0px';
 			}
-			if (content === 'flavor-text') {
-				return '0px 0px 10px 10px';
-			}
-			if (content === 'sprite') {
-				return '10px 0px 0px 0px';
-			}
-
-			return '0px';
 		}};
 		background-image: ${(props) =>
 			props.typeOfContent === 'sprite' &&
@@ -122,13 +119,14 @@ export const CardItemSty = styled.div`
 	margin: ${(props) =>
 		props.typeOfContent !== 'flavor-text' ? 'auto 0' : '1rem'};
 	padding: ${(props) => {
-		if (props.typeOfContent === 'sprite') {
-			return '0';
+		switch (props.typeOfContent) {
+			case 'sprite':
+				return '0';
+			case 'flavor-text':
+				return '0.4rem 1rem';
+			default:
+				return '0 0.5rem';
 		}
-		if (props.typeOfContent === 'flavor-text') {
-			return '0.4rem 1rem';
-		}
-		return '0 0.5rem';
 	}};
 	border-radius: ${(props) => props.typeOfContent === 'flavor-text' && '10px'};
 	-webkit-box-shadow: ${(props) =>
@@ -157,7 +155,7 @@ export const CardItemSty = styled.div`
 			if (props.typeOfContent === 'sprite' || !props.showSingle) {
 				return 'center';
 			}
-			if (props.typeOfContent === 'name') {
+			if (props.typeOfContent === 'poke-name') {
 				return 'flex-end';
 			}
 			return 'space-between';

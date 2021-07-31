@@ -1,58 +1,74 @@
+import { useSelector } from 'react-redux';
 import { PokeTypeSty } from './CardItem.style';
+import PokemonSprite from '../../PokemonSprite/PokemonSprite';
 
-const CardItemFunctions = ({ pokeName, id, content }) => {
-	if (id === 'number') {
-		// adds leading zero
-		return { contentToShow: `#${content.toString().padStart(3, '0')}` };
-	}
-	if (id === 'category') {
-		const engCategory = content.filter((cat) => cat.language.name === 'en');
-		return { contentToShow: engCategory[0].genus };
-	}
-	if (id === 'types') {
-		return {
-			contentToShow: content.map((type, i) => (
-				<PokeTypeSty
-					pokeType={type.type.name}
-					key={`${pokeName} type nº ${i + 1}`}
-					className="card-poke-type"
-				>
-					{type.type.name}
-				</PokeTypeSty>
-			)),
-		};
-	}
-	if (id === 'height' || id === 'weight') {
-		const layout = [id, (content * 0.1).toFixed(1)];
-		const toRender = (item, i) => {
-			if (i === 0) {
-				return item;
-			}
-			if (id === 'height') {
-				return `${item}m`;
-			}
-			return `${item}kg`;
-		};
-		return {
-			contentToShow: layout.map((item, i) => (
-				<div key={`${id} of ${pokeName} - item ${i + 1}`}>
-					{toRender(item, i)}
-				</div>
-			)),
-		};
-	}
-	if (id === 'flavor-text') {
-		const engEntries = content.filter(
-			(entry) => entry.language.name === 'en'
-		);
+const CardItemFunctions = ({ pokeName, pokeId, cardItem, showSingle }) => {
+	const { pokeData, speciesData } = useSelector(
+		(state) => state.pokeCards.singleCard
+	);
 
-		return {
-			contentToShow: (
-				<div>{engEntries[engEntries.length - 1].flavor_text}</div>
-			),
-		};
-	}
-	return { contentToShow: content };
+	const contentToShow = () => {
+		switch (cardItem) {
+			case 'poke-id':
+				return `#${(!showSingle ? pokeId : speciesData.id)
+					.toString()
+					.padStart(3, '0')}`;
+			case 'sprite':
+				return (
+					<PokemonSprite
+						alt={`sprite of ${pokeName}`}
+						spriteStyles={{
+							width: '110px',
+							height: '110px',
+						}}
+						id={!showSingle ? pokeId : pokeData.id}
+					/>
+				);
+
+			case 'poke-name':
+				return pokeName.replaceAll('-', ' ');
+			case 'category':
+				return speciesData.genera.filter(
+					(cat) => cat.language.name === 'en'
+				)[0].genus;
+			case 'types':
+				return pokeData.types.map((type, i) => (
+					<PokeTypeSty
+						pokeType={type.type.name}
+						key={`${pokeName} type nº ${i + 1}`}
+						className="card-poke-type"
+					>
+						{type.type.name}
+					</PokeTypeSty>
+				));
+			case 'height':
+			case 'weight':
+				return [cardItem, (pokeData[cardItem] * 0.1).toFixed(1)].map(
+					(el, i) => (
+						<div key={`${cardItem} of ${pokeName} - item ${i + 1}`}>
+							{i === 0 && el}
+							{i > 0 && cardItem === 'height'
+								? `${el}m`
+								: i > 0 && `${el}kg`}
+						</div>
+					)
+				);
+			case 'flavor-text':
+				return (
+					<div>
+						{
+							speciesData.flavor_text_entries
+								.filter((entry) => entry.language.name === 'en')
+								.pop().flavor_text
+						}
+					</div>
+				);
+
+			default:
+				return 'error';
+		}
+	};
+	return { contentToShow: contentToShow() };
 };
 
 export default CardItemFunctions;

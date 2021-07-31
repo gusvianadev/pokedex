@@ -43,56 +43,58 @@ const CardsHolder = () => {
 					isError={isError}
 				/>
 			)}
-			{isError && (
+			{isError ? (
 				<ErrorMessage
 					content="Sorry, we couldn't find what you're looking for ☹
-" // I hate you Prettier why is that quote alone please get back her with her friends
+" // I hate you Prettier get that quote back with her friends
 				/>
+			) : (
+				<div className="container cards">
+					{!showSingle
+						? pokeCards.map((name, i) => (
+								<PokemonCard
+									key={name}
+									pokeName={name}
+									pokeId={allPokes[i].id}
+									setScrollTopPosition={setScrollTopPosition}
+									cardsHolderRef={cardsHolderRef}
+								/>
+						  ))
+						: !isLoading && (
+								<PokemonCard
+									pokeName={singleCard.pokeData.name}
+									pokeID={singleCard.pokeData.id}
+								/>
+						  )}
+				</div>
 			)}
-			<div className="container cards">
-				{!showSingle && !isError
-					? pokeCards.map((name, i) => (
-							<PokemonCard
-								key={name}
-								pokeName={name}
-								id={allPokes[i].id}
-								setScrollTopPosition={setScrollTopPosition}
-								cardsHolderRef={cardsHolderRef}
-							/>
-					  ))
-					: !isLoading &&
-					  !isError && (
-							<PokemonCard
-								pokeName={singleCard.pokeData.name}
-								id={singleCard.pokeData.id}
-							/>
-					  )}
-			</div>
-			{isLoading && (
+			{isLoading ? (
 				<div className="container ldn-ring-container">
 					<LoadingRing />
 				</div>
-			)}
-
-			{!isLoading && pokeCards.length !== 0 && !showSingle && !isError && (
-				<div className="container button-container">
-					<Button
-						aria="search more pokémon button"
-						type="button"
-						btnStyles={{
-							width: '100%',
-							maxWidth: '150px',
-							padding: '0.5rem 0',
-						}}
-						onClick={() =>
-							dispatch(changeCurrentUrl(nextUrl)) &&
-							setScrollTopPosition(
-								cardsHolderRef.current.scrollTop
-							)
-						}
-						content={<p>more</p>}
-					/>
-				</div>
+			) : (
+				pokeCards &&
+				!showSingle &&
+				!isError && (
+					<div className="container button-container">
+						<Button
+							aria="search more pokémon button"
+							type="button"
+							btnStyles={{
+								width: '100%',
+								maxWidth: '150px',
+								padding: '0.5rem 0',
+							}}
+							onClick={() =>
+								dispatch(changeCurrentUrl(nextUrl)) &&
+								setScrollTopPosition(
+									cardsHolderRef.current.scrollTop
+								)
+							}
+							content={<p>more</p>}
+						/>
+					</div>
+				)
 			)}
 		</CardsHolderSty>
 	);
