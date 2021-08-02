@@ -9,8 +9,8 @@ It's a pokédex. You can search for a specific pokémon, or scroll down and pick
 ## Install and Run
 
 1. Clone down this repository. You will need `node` and `npm` installed globally on your computer.
-2. Run `npm` install to install all the dependencies.
-3. Run `npm` start to start the app.
+2. Run `npm install` to install all the dependencies.
+3. Run `npm start` to start the app.
 4. Or visit the website: [Pokédex](https://gusvianadev.github.io/pokedex/)
 
 ## What can this do?
