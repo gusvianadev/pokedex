@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 
 const ButtonSty = styled.button`
-	width: ${(props) => (props.props.width ? props.props.width : '')};
-	max-width: ${(props) => (props.props.maxWidth ? props.props.maxWidth : '')};
-	min-height: ${(props) =>
-		props.props.minHeight ? props.props.minHeight : ''};
-	padding: ${(props) => (props.props.padding ? props.props.padding : '')};
-	margin: ${(props) => (props.props.margin ? props.props.margin : '0 auto')};
+	width: ${(props) => props.props.width || ''};
+	max-width: ${(props) => props.props.maxWidth || ''};
+	min-height: ${(props) => props.props.minHeight || ''};
+	padding: ${(props) => props.props.padding || ''};
+	margin: ${(props) => props.props.margin || '0 auto'};
 	display: flex;
 	-webkit-box-shadow: inset 0px 0px 10px 1px var(--clr-yellow-shadow),
 		4px 4px 3px -1px black;

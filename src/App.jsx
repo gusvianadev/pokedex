@@ -4,6 +4,7 @@ import Title from './components/Title/Title';
 import SearchBar from './components/SearchBar/SearchBar';
 import CardsHolder from './components/CardsHolder/CardsHolder';
 import BackgroundScreenSty from './styles/BackgroundScreen.style';
+import Footer from './components/Footer/Footer';
 
 const App = () => (
 	<AppSty>
@@ -19,7 +20,7 @@ const App = () => (
 				<CardsHolder />
 			</BackgroundScreenSty>
 		</main>
-		<footer />
+		<Footer />
 	</AppSty>
 );
 
